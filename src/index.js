@@ -35,6 +35,7 @@ class Gallery extends React.Component {
         this.state = {
             width: "18rem",
             images: images,
+            visible_images: images.slice(),
             category: "All"
         }
     }
@@ -45,11 +46,24 @@ class Gallery extends React.Component {
         this.setState({ category: cat })
     }
 
+    filterImages(cat) {
+        this.setState({ category: cat })
+        if (cat === "All") {
+            this.setState({ visible_images: this.state.images.slice() })
+        } else {
+            this.setState({
+                visible_images: this.state.images.filter(
+                    (image) => image.category === cat)
+            })
+        }
+        console.log(this.state.visible_images);
+    }
+
 
     render() {
         const width = this.state.width;
-        const images = this.state.images;
-        const cards = images.map((image, index) =>
+        const visible_images = this.state.visible_images.slice();
+        const cards = visible_images.map((image, index) =>
             <Col>
                 <MyCard width={width} title={image.title} src={image.src} category={image.category} key={index} />
             </Col>
@@ -59,9 +73,9 @@ class Gallery extends React.Component {
             <div className="gallery">
                 <div className="game-info">
                     <Badge bg="secondary">{this.state.category}</Badge>
-                    <MyButton value="A" onClick={() => this.changeCategory("A")}></MyButton>
-                    <MyButton value="B" onClick={() => this.changeCategory("B")}></MyButton>
-                    <MyButton value="C" onClick={() => this.changeCategory("C")}></MyButton>
+                    <MyButton value="A" onClick={() => this.filterImages("A")}></MyButton>
+                    <MyButton value="B" onClick={() => this.filterImages("B")}></MyButton>
+                    <MyButton value="C" onClick={() => this.filterImages("C")}></MyButton>
                     <div>{/* status */}</div>
                     <Row xs={1} md={3} className="g-4">
                         {cards}
