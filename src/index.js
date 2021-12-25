@@ -17,10 +17,14 @@ function uniq(array) {
 
 function MyCard(props) {
     return (
-        <Card style={{ width: props.width }}>
+        <Card style={{ width: props.width }} >
+            <Card.Header>
+                <Badge pill bg="secondary">
+                    {props.category}
+                </Badge>
+            </Card.Header>
             <Card.Img variant="top" src={props.src} />
             <Card.Title>{props.title}</Card.Title>
-            <Card.Body>{props.category}</Card.Body>
         </Card>
     )
 }
@@ -37,15 +41,16 @@ class Gallery extends React.Component {
     constructor(props) {
         super(props);
         let images = [
-            { title: "example01", src: "http://placeholder.pics/svg/300x200", category: "A" },
-            { title: "example02", src: "http://placeholder.pics/svg/300x200", category: "A" },
-            { title: "example03", src: "http://placeholder.pics/svg/300x200", category: "B" },
+            { title: "example00", src: "/imgs/00.png", category: "A" },
+            { title: "example01", src: "/imgs/01.png", category: "A" },
+            { title: "example02", src: "/imgs/02.png", category: "B" },
         ]
         let categories = ["All"].concat(images.map((image) => image.category));
         let uniq_categories = uniq(categories);
         let buttons = uniq_categories.map((cat) => { return { name: cat, value: cat }; });
 
         this.state = {
+            title: props.title,
             width: "18rem",
             images: images,
             visible_images: images.slice(),
@@ -78,7 +83,7 @@ class Gallery extends React.Component {
         const width = this.state.width;
         const visible_images = this.state.visible_images.slice();
         const cards = visible_images.map((image, index) =>
-            <Col>
+            <Col key={index}>
                 <MyCard width={width} title={image.title} src={image.src} category={image.category} key={index} />
             </Col>
         );
@@ -101,11 +106,11 @@ class Gallery extends React.Component {
 
         return (
             <Container className="gallery">
+                <h2>{this.state.title}</h2>
                 <div className="game-info">
                     <ButtonGroup className="mb-2">
                         {radio_buttons}
                     </ButtonGroup>
-                    <div>{/* status */}</div>
                     <Row xs={1} md={3} className="g-4">
                         {cards}
                     </Row>
@@ -118,7 +123,7 @@ class Gallery extends React.Component {
 // ========================================
 
 ReactDOM.render(
-    <Gallery />,
+    <Gallery title="My Gallery" />,
     document.getElementById('root')
 );
 

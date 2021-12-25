@@ -1,0 +1,22 @@
+{
+    "images": [
+        {
+            "index": 0,
+            "name": "000",
+            "src": "/imgs/00.png",
+            "category": "Package"
+        },
+        {
+            "index": 1,
+            "name": "001",
+            "src": "/imgs/01.png",
+            "category": "Package"
+        },
+        {
+            "index": 2,
+            "name": "002",
+            "src": "/imgs/02.png",
+            "category": "Symbol"
+        }
+    ]
+}
