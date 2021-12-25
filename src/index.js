@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 // import Button from 'react-bootstrap/Button';
-import { Button, Card } from 'react-bootstrap';
+import { Button, Card, Row, Col } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
@@ -18,8 +18,9 @@ class Gallery extends React.Component {
     constructor(props) {
         super(props);
         let images = [
-            { title: "example01", src: "http://placeholder.pics/svg/300" },
-            { title: "example02", src: "http://placeholder.pics/svg/300" },
+            { title: "example01", src: "http://placeholder.pics/svg/300x200" },
+            { title: "example02", src: "http://placeholder.pics/svg/300x200" },
+            { title: "example03", src: "http://placeholder.pics/svg/300x200" },
         ]
         this.state = {
             width: "18rem",
@@ -30,18 +31,18 @@ class Gallery extends React.Component {
         const width = this.state.width;
         const images = this.state.images;
         const cards = images.map((image, index) =>
-            <li>
+            <Col>
                 <MyCard width={width} title={image.title} src={image.src} key={index} />
-            </li>
+            </Col>
         );
 
         return (
             <div className="gallery">
                 <div className="game-info">
                     <div>{/* status */}</div>
-                    <ul>
+                    <Row xs={1} md={3} className="g-4">
                         {cards}
-                    </ul>
+                    </Row>
                 </div>
             </div>
         );
