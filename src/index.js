@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 // import Button from 'react-bootstrap/Button';
-import { Button, Card, Row, Col } from 'react-bootstrap';
+import { Button, Card, Row, Col, Badge } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
@@ -15,6 +15,15 @@ function MyCard(props) {
         </Card>
     )
 }
+
+function MyButton(props) {
+    return (
+        <Button className="mybutton" onClick={props.onClick}>
+            {props.value}
+        </Button>
+    )
+}
+
 class Gallery extends React.Component {
     constructor(props) {
         super(props);
@@ -25,9 +34,18 @@ class Gallery extends React.Component {
         ]
         this.state = {
             width: "18rem",
-            images: images
+            images: images,
+            category: "All"
         }
     }
+
+    changeCategory(cat) {
+        // const new_cat = this.state.category;
+        // new_cat = cat;
+        this.setState({ category: cat })
+    }
+
+
     render() {
         const width = this.state.width;
         const images = this.state.images;
@@ -40,6 +58,10 @@ class Gallery extends React.Component {
         return (
             <div className="gallery">
                 <div className="game-info">
+                    <Badge bg="secondary">{this.state.category}</Badge>
+                    <MyButton value="A" onClick={() => this.changeCategory("A")}></MyButton>
+                    <MyButton value="B" onClick={() => this.changeCategory("B")}></MyButton>
+                    <MyButton value="C" onClick={() => this.changeCategory("C")}></MyButton>
                     <div>{/* status */}</div>
                     <Row xs={1} md={3} className="g-4">
                         {cards}
