@@ -96,7 +96,7 @@ input_name = process.argv[2]
 if (process.env.GITHUB_WORKSPACE) {
     console.log(`github workspace : ${process.env.GITHUB_WORKSPACE}`)
 
-    fse.copySync("build/*", process.env.GITHUB_WORKSPACE)
+    fse.copySync("/code/build/*", process.env.GITHUB_WORKSPACE)
 }
 
 // https://note.com/tably/n/n46041458d6b3
