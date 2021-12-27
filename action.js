@@ -80,12 +80,12 @@ if (process.argv.length >= 4) {
     console.log(`output_name : ${output_name}`)
 }
 
-if (process.env.GITHUB_WORKSPACE) {
-    const dir = core.getInput('dir');
-    console.log(`Hello ${dir}!`);
-    const outpath = core.getInput('outpath');
-    console.log(`Hello ${outpath}!`);
-}
+// if (process.env.GITHUB_WORKSPACE) {
+//     const dir = core.getInput('dir');
+//     console.log(`Hello ${dir}!`);
+//     const outpath = core.getInput('outpath');
+//     console.log(`Hello ${outpath}!`);
+// }
 
 input_name = process.argv[2]
 // print ls for debug
