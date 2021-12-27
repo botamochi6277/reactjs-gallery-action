@@ -1,0 +1,19 @@
+name: 'Gallery reactjs'
+description: 'make gallery page with reactjs'
+author: 'botamochi6277'
+branding:
+  icon: 'image'
+  color: 'green'
+inputs:
+  dir:
+    description: 'target directory containing images'
+    default: 'imgs'
+    required: true
+  outpath:
+    description: 'target directory to saving image list'
+    default: '.'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.dir }} ${{ inputs.outpath }}
