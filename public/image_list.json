@@ -1,22 +1,22 @@
 {
     "images": [
         {
-            "index": 0,
-            "name": "000",
-            "src": "/imgs/00.png",
-            "category": "Package"
+            "index": "A-0",
+            "name": "00",
+            "src": "imgs/A/00.png",
+            "category": "A"
         },
         {
-            "index": 1,
-            "name": "001",
-            "src": "/imgs/01.png",
-            "category": "Package"
+            "index": "A-1",
+            "name": "01",
+            "src": "imgs/A/01.png",
+            "category": "A"
         },
         {
-            "index": 2,
-            "name": "002",
-            "src": "/imgs/02.png",
-            "category": "Symbol"
+            "index": "B-0",
+            "name": "02",
+            "src": "imgs/B/02.png",
+            "category": "B"
         }
     ]
 }

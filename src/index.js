@@ -1,11 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import axios from "axios";
 import './index.css';
 // import Button from 'react-bootstrap/Button';
 import { Button, Card, Row, Col, Badge, ToggleButton, ButtonGroup, Container } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
-
-
 
 function uniq(array) {
     const unique_array = [];
@@ -76,6 +75,23 @@ class Gallery extends React.Component {
             })
         }
         console.log(this.state.visible_images);
+    }
+
+    componentDidMount() {
+        axios.get("/image_list.json").then((response) => {
+            const images = response.data.images;
+            console.log(`#images: ${images.length}`);
+            const categories = ["All"].concat(images.map((image) => image.category));
+            const uniq_categories = uniq(categories);
+            const buttons = uniq_categories.map((cat) => { return { name: cat, value: cat }; });
+            buttons.map((btn) => console.log(btn));
+            // console.log(`buttons: ${buttons.map((btn)=>console.log(btn))}`);
+            this.setState({
+                images: images,
+                visible_images: images.slice(),
+                buttons: buttons.slice(),
+            })
+        });
     }
 
 
