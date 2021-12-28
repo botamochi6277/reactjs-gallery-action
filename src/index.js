@@ -40,9 +40,9 @@ class Gallery extends React.Component {
     constructor(props) {
         super(props);
         let images = [
-            { title: "example00", src: "/imgs/00.png", category: "A" },
-            { title: "example01", src: "/imgs/01.png", category: "A" },
-            { title: "example02", src: "/imgs/02.png", category: "B" },
+            { name: "example00", src: "./imgs/00.png", category: "A" },
+            { name: "example01", src: "./imgs/01.png", category: "A" },
+            { name: "example02", src: "./imgs/02.png", category: "B" },
         ]
         let categories = ["All"].concat(images.map((image) => image.category));
         let uniq_categories = uniq(categories);
@@ -78,7 +78,7 @@ class Gallery extends React.Component {
     }
 
     componentDidMount() {
-        axios.get("/image_list.json").then((response) => {
+        axios.get("./image_list.json").then((response) => {
             const images = response.data.images;
             console.log(`#images: ${images.length}`);
             const categories = ["All"].concat(images.map((image) => image.category));
@@ -100,7 +100,7 @@ class Gallery extends React.Component {
         const visible_images = this.state.visible_images.slice();
         const cards = visible_images.map((image, index) =>
             <Col key={index}>
-                <MyCard width={width} title={image.title} src={image.src} category={image.category} key={index} />
+                <MyCard width={width} title={image.name} src={image.src} category={image.category} key={index} />
             </Col>
         );
 
