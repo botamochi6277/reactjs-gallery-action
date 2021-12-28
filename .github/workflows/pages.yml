@@ -1,5 +1,7 @@
 name: Build Reactjs and Deploy on Pages
-on: [push]
+on:
+  push:
+    branches: [main]
 jobs:
   build_vue:
     runs-on: ubuntu-latest
@@ -21,6 +23,7 @@ jobs:
       - name: Commit and push files
         run: |
           git checkout -b gh-pages
+          git pull
           git add .
           git commit -m "build pages" -a
-          git push origin gh-pages -u
+          git push origin HEAD:gh-pages --force
