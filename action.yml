@@ -9,12 +9,12 @@ inputs:
     description: 'target directory containing images'
     default: 'imgs'
     required: true
-  outpath:
-    description: 'target directory to saving image list'
-    default: '.'
+  filename:
+    description: 'filename to saving image list'
+    default: 'image_list.json'
 runs:
   using: 'docker'
   image: 'Dockerfile'
   args:
     - ${{ inputs.dir }}
-    - ${{ inputs.outpath }}
+    - ${{ inputs.filename }}

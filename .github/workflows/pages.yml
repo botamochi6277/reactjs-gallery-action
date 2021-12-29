@@ -13,10 +13,8 @@ jobs:
         uses: botamochi6277/reactjs-gallery-action@main
         with:
           dir: 'imgs'
-          outpath: '.'
+          filename: './image_list.json'
       - name: git setting
-        env:
-          GITHUB_USER: ${{ secrets.GITHUB_USER }}
         run: |
           git config --local user.email "action_runner@users.noreply.github.com"
           git config --local user.name "action runner"
