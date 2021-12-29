@@ -48,6 +48,8 @@ const assignImage = (imgs, dirpath, output_path) => {
                         }
                     );
                     idx += 1;
+                } else {
+                    // console.log(`${fp} is not image file`);
                 }
                 // console.log(imgs);
                 // console.log(fp);
@@ -88,20 +90,20 @@ if (process.argv.length >= 4) {
 // }
 
 input_name = process.argv[2]
-// print ls for debug
-// showFiles(input_name, console.log);
+// print file list for debug
+showFiles(input_name, console.log);
 
 
-// copy
+// run in github workspace
 if (process.env.GITHUB_WORKSPACE) {
+    // copy
     console.log(`github workspace : ${process.env.GITHUB_WORKSPACE}`)
-
     fse.copySync("/code/build/", process.env.GITHUB_WORKSPACE)
-}
 
-// https://note.com/tably/n/n46041458d6b3
-// move to github workspace
-if (process.env.GITHUB_WORKSPACE) {
+
+    // https://note.com/tably/n/n46041458d6b3
+    // move to github workspace
+
     const workspace = process.env.GITHUB_WORKSPACE;
     // const targetDir = process.env.INPUT_TARGET_DIRECTORY;
     // process.env.GITHUB_WORKSPACE = `${workspace}/${targetDir}`;
