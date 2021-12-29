@@ -48,6 +48,7 @@ const assignImage = (imgs, root_path, dirpath, output_path) => {
                         }
                     );
                     idx += 1;
+                    console.log(`${path.relative(root_path, fp)}`)
                 } else {
                     // console.log(`${fp} is not image file`);
                 }
@@ -99,7 +100,7 @@ if (process.argv.length >= 5) {
 }
 
 // print file list for debug
-showFiles(input_name, console.log);
+// showFiles(input_name, console.log);
 
 if (process.env.GITHUB_REPOSITORY) {
     if (process.env.GITHUB_REPOSITORY !== "botamochi6277/reactjs-gallery-action") {
