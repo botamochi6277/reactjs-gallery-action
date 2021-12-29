@@ -103,6 +103,7 @@ if (process.argv.length >= 5) {
 // showFiles(input_name, console.log);
 
 if (process.env.GITHUB_REPOSITORY) {
+    console.log(`current repository: ${process.env.GITHUB_REPOSITORY}`)
     if (process.env.GITHUB_REPOSITORY !== "botamochi6277/reactjs-gallery-action") {
         // remove sample images
         fse.removeSync('imgs', (err) => {
@@ -115,8 +116,6 @@ if (process.env.GITHUB_REPOSITORY) {
 
 // run in github workspace
 if (process.env.GITHUB_WORKSPACE) {
-
-
     // copy
     console.log(`github workspace : ${process.env.GITHUB_WORKSPACE}`)
     fse.copySync("/code/build/", process.env.GITHUB_WORKSPACE)
