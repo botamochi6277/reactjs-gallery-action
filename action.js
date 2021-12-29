@@ -106,27 +106,21 @@ if (process.env.GITHUB_REPOSITORY) {
     console.log(`current repository: ${process.env.GITHUB_REPOSITORY}`)
     if (process.env.GITHUB_REPOSITORY !== "botamochi6277/reactjs-gallery-action") {
         // remove sample images
-        fse.removeSync('imgs', (err) => {
-            if (err) throw err;
-
-            console.log('remove imgs');
-        });
+        fse.removeSync('imgs');
+        console.log('remove imgs');
     }
 }
 
 // run in github workspace
 if (process.env.GITHUB_WORKSPACE) {
+    const workspace = process.env.GITHUB_WORKSPACE;
     // copy
-    console.log(`github workspace : ${process.env.GITHUB_WORKSPACE}`)
-    fse.copySync("/code/build/", process.env.GITHUB_WORKSPACE)
-
+    console.log(`github workspace : ${workspace}`)
+    fse.copySync("/code/build/", workspace)
+    console.log(`copy built files in ${workspace}`)
 
     // https://note.com/tably/n/n46041458d6b3
     // move to github workspace
-
-    const workspace = process.env.GITHUB_WORKSPACE;
-    // const targetDir = process.env.INPUT_TARGET_DIRECTORY;
-    // process.env.GITHUB_WORKSPACE = `${workspace}/${targetDir}`;
     process.chdir(workspace);
 }
 

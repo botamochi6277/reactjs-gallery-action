@@ -1,1 +1,28 @@
-{"images":[{"index":"B-0","name":"02","src":"imgs/B/02.png","category":"B"},{"index":"A-0","name":"00","src":"imgs/A/00.png","category":"A"},{"index":"A-1","name":"01","src":"imgs/A/01.png","category":"A"},{"index":"a-0","name":"aa","src":"imgs/A/a/aa.svg","category":"a"}]}
+{
+    "images": [
+        {
+            "index": "B-0",
+            "name": "02",
+            "src": "imgs/Example/B/02.png",
+            "category": "B"
+        },
+        {
+            "index": "B-1",
+            "name": "03",
+            "src": "imgs/Example/B/03.svg",
+            "category": "B"
+        },
+        {
+            "index": "A-0",
+            "name": "00",
+            "src": "imgs/Example/A/00.png",
+            "category": "A"
+        },
+        {
+            "index": "A-1",
+            "name": "01",
+            "src": "imgs/Example/A/01.png",
+            "category": "A"
+        }
+    ]
+}
