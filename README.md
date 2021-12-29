@@ -1,10 +1,16 @@
 # ReactJS gallery action
 
+![](https://github.com/botamochi6277/reactjs-gallery-action/actions/workflows/build.yml/badge.svg)
+![](https://github.com/botamochi6277/reactjs-gallery-action/actions/workflows/pages.yml/badge.svg)
+
 A github action to deploy pages of gallery
 This action requires following two arguments.
+However, please keep these in default value for rendering.
 
 - `dir`: directory path containing image files
-- `outpath`
+- `filename`: filename to save image list.
+
+[Sample Pages](https://botamochi6277.github.io/reactjs-gallery-action/)
 
 ## Example
 
@@ -24,7 +30,7 @@ jobs:
         uses: botamochi6277/reactjs-gallery-action@main
         with:
           dir: 'imgs'
-          filename: '.'
+          filename: './image_list.json'
       - name: git setting
         run: |
           git config --local user.email "action_runner@users.noreply.github.com"
