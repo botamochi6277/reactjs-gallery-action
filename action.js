@@ -63,33 +63,26 @@ const assignImage = (imgs, dirpath, output_path) => {
     // console.log(`imgs: ${imgs}`);
 }
 
-const writeImageList = async (dirpath, output_path) => {
-    let images = new Array();
-    imgs = await assignImage(images, dirpath);
-    s = JSON.stringify({ "images": imgs });
-    console.log(imgs)
-    fs.writeFileSync(output_path, s);
-    // fs.writeFile(output_path, s);
-    // s = JSON.stringify({ "images": images });
-    // console.log(images)
-    // fs.writeFileSync(output_path, s);
-}
-
-
 output_name = "output.json";
 if (process.argv.length >= 4) {
     output_name = process.argv[3];
-    console.log(`output_name : ${output_name}`)
 }
 
-// if (process.env.GITHUB_WORKSPACE) {
-//     const dir = core.getInput('dir');
-//     console.log(`Hello ${dir}!`);
-//     const outpath = core.getInput('outpath');
-//     console.log(`Hello ${outpath}!`);
-// }
-
 input_name = process.argv[2]
+
+if (input_name === "-h" || input_name === "--help") {
+    console.log("usage: node [-h] action.js root img_dir filename");
+    console.log("")
+    console.log("  create image list for gallery pages")
+    console.log("")
+    console.log("positional arguments:")
+    console.log("  root\t root path of react.js app")
+    console.log("  img_dir\t directory containing images")
+    console.log("  filename\t filename of image list")
+    console.log("options:")
+    console.log("  -h, --help\tshow this help message and exit");
+    process.exit(0)
+}
 // print file list for debug
 showFiles(input_name, console.log);
 
@@ -123,4 +116,5 @@ if (process.env.GITHUB_WORKSPACE) {
 }
 
 assignImage(new Array(), input_name, output_name);
+console.log(`save image list in ${output_name}`)
 
