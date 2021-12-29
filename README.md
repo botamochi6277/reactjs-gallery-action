@@ -28,9 +28,6 @@ jobs:
         uses: actions/checkout@v2
       - id: Build-Reactjs
         uses: botamochi6277/reactjs-gallery-action@main
-        with:
-          dir: 'imgs'
-          filename: './image_list.json'
       - name: git setting
         run: |
           git config --local user.email "action_runner@users.noreply.github.com"
