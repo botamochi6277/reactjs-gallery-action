@@ -21,7 +21,7 @@ const showFiles = (dirpath, callback) => {
     });
 }
 
-const assignImage = (imgs, dirpath, output_path) => {
+const assignImage = (imgs, root_path, dirpath, output_path) => {
     fs.readdir(dirpath, { withFileTypes: true }, (err, dirents) => {
         let idx = 0;
         if (err) {
@@ -32,7 +32,7 @@ const assignImage = (imgs, dirpath, output_path) => {
         for (const dirent of dirents) {
             const fp = path.join(dirpath, dirent.name);
             if (dirent.isDirectory()) {
-                assignImage(imgs, fp, output_path);
+                assignImage(imgs, root_path, fp, output_path);
             } else {
                 ext = path.extname(fp)
                 if ((ext === ".jpg") || (ext === ".png") || (ext === ".jpeg") || (ext === ".svg")) {
@@ -43,7 +43,7 @@ const assignImage = (imgs, dirpath, output_path) => {
                         {
                             "index": `${cat}-${idx}`,
                             "name": path.basename(fp).split(".")[0],
-                            "src": path.relative("./public", fp),
+                            "src": path.relative(root_path, fp),
                             "category": cat
                         }
                     );
@@ -63,14 +63,7 @@ const assignImage = (imgs, dirpath, output_path) => {
     // console.log(`imgs: ${imgs}`);
 }
 
-output_name = "output.json";
-if (process.argv.length >= 4) {
-    output_name = process.argv[3];
-}
-
-input_name = process.argv[2]
-
-if (input_name === "-h" || input_name === "--help") {
+const printHelp = () => {
     console.log("usage: node [-h] action.js root img_dir filename");
     console.log("")
     console.log("  create image list for gallery pages")
@@ -81,8 +74,30 @@ if (input_name === "-h" || input_name === "--help") {
     console.log("  filename\t filename of image list")
     console.log("options:")
     console.log("  -h, --help\tshow this help message and exit");
+}
+
+// args process
+
+root_name = "-h"
+if (process.argv.length >= 3) {
+    root_name = process.argv[2]
+}
+
+if (root_name === "-h" || root_name === "--help") {
+    printHelp()
     process.exit(0)
 }
+
+input_name = "./imgs"
+if (process.argv.length >= 4) {
+    input_name = process.argv[3]
+}
+
+output_name = "output.json";
+if (process.argv.length >= 5) {
+    output_name = process.argv[4];
+}
+
 // print file list for debug
 showFiles(input_name, console.log);
 
@@ -115,6 +130,6 @@ if (process.env.GITHUB_WORKSPACE) {
     process.chdir(workspace);
 }
 
-assignImage(new Array(), input_name, output_name);
+assignImage(new Array(), root_name, input_name, output_name);
 console.log(`save image list in ${output_name}`)
 
