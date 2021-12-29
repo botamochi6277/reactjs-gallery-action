@@ -105,7 +105,7 @@ if (process.argv.length >= 5) {
 if (process.env.GITHUB_REPOSITORY) {
     if (process.env.GITHUB_REPOSITORY !== "botamochi6277/reactjs-gallery-action") {
         // remove sample images
-        fse.remove('imgs', (err) => {
+        fse.removeSync('imgs', (err) => {
             if (err) throw err;
 
             console.log('remove imgs');
