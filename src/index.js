@@ -44,13 +44,14 @@ class Gallery extends React.Component {
             { name: "example01", src: "./imgs/01.png", category: "A" },
             { name: "example02", src: "./imgs/02.png", category: "B" },
         ]
-        let categories = ["All"].concat(images.map((image) => image.category));
+        let categories = images.map((image) => image.category);
         let uniq_categories = uniq(categories);
+        uniq_categories = ["All"].concat(uniq_categories.sort());
         let buttons = uniq_categories.map((cat) => { return { name: cat, value: cat }; });
 
         this.state = {
             title: props.title,
-            width: "18rem",
+            width: "",
             images: images,
             visible_images: images.slice(),
             buttons: buttons,
