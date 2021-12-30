@@ -184,7 +184,7 @@ class Gallery extends React.Component {
                 <MyHelmet title={this.state.brand} />
                 <Container className="gallery">
                     <MyNavbar brand={this.state.brand} author={this.state.actor} server={this.state.server} repo={this.state.repo} />
-                    <div className="game-info">
+                    <div className="image card">
                         <ButtonGroup className="mb-2">
                             {radio_buttons}
                         </ButtonGroup>

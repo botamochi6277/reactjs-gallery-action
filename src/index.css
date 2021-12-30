@@ -41,15 +41,10 @@ ul {
   background: #ddd;
 }
 
-.game {
-  display: flex;
-  flex-direction: row;
-}
-
-.game-info {
-  margin-left: 20px;
-}
-
 .badge {
   margin-right: 10px;
+}
+
+svg {
+  font-family: 'Futura', sans-serif;
 }
