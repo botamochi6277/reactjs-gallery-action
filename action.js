@@ -36,19 +36,22 @@ const assignImage = (imgs, root_path, dirpath, output_path) => {
             } else {
                 ext = path.extname(fp)
                 if ((ext === ".jpg") || (ext === ".png") || (ext === ".jpeg") || (ext === ".svg")) {
-                    ss = fp.split("/")
-                    cat = ss[ss.length - 2]
-
+                    // ./img/Example/A ->["img","Example","A"]
+                    const img_rel_path = path.relative(root_path, fp)
+                    const ss = path.dirname(img_rel_path).split("/");
+                    // console.debug(ss)
+                    const tags = ss.slice(1) // remove ./img
+                    const cat = tags.slice(-1);
                     imgs.push(
                         {
                             "index": `${cat}-${idx}`,
                             "name": path.basename(fp).split(".")[0],
-                            "src": path.relative(root_path, fp),
-                            "category": cat
+                            "src": img_rel_path,
+                            "tags": tags
                         }
                     );
                     idx += 1;
-                    console.log(`${path.relative(root_path, fp)}`)
+                    console.log(`${img_rel_path}`)
                 } else {
                     // console.log(`${fp} is not image file`);
                 }

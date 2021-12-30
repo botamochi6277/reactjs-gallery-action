@@ -2,8 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from "axios";
 import './index.css';
-// import Button from 'react-bootstrap/Button';
-import { Button, Card, Row, Col, Badge, ToggleButton, ButtonGroup, Container, Nav, Navbar } from 'react-bootstrap';
+import { Card, Row, Col, Badge, ToggleButton, ButtonGroup, Container, Nav, Navbar } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function uniq(array) {
@@ -15,12 +14,13 @@ function uniq(array) {
 }
 
 function MyCard(props) {
+    const badges = props.tags.map((tag, index) =>
+        <Badge pill bg="secondary" key={index}> {tag}</Badge>
+    );
     return (
         <Card style={{ width: props.width }} >
             <Card.Header>
-                <Badge pill bg="secondary">
-                    {props.category}
-                </Badge>
+                {badges}
             </Card.Header>
             <Card.Img variant="top" src={props.src} />
             <Card.Title>{props.title}</Card.Title>
@@ -50,14 +50,20 @@ class Gallery extends React.Component {
     constructor(props) {
         super(props);
         let images = [
-            { name: "example00", src: "./imgs/00.png", category: "A" },
-            { name: "example01", src: "./imgs/01.png", category: "A" },
-            { name: "example02", src: "./imgs/02.png", category: "B" },
+            { name: "example00", src: "./imgs/00.png", tags: ["example", "A"] },
+            { name: "example01", src: "./imgs/01.png", tags: ["example", "A"] },
+            { name: "example02", src: "./imgs/02.png", tags: ["example", "B"] },
         ]
-        let categories = images.map((image) => image.category);
-        let uniq_categories = uniq(categories);
-        uniq_categories = ["All"].concat(uniq_categories.sort());
-        let buttons = uniq_categories.map((cat) => { return { name: cat, value: cat }; });
+        let tags = []
+        for (const key in images) {
+            if (Object.hasOwnProperty.call(images, key)) {
+                const image = images[key];
+                tags = tags.concat(image.tags);
+            }
+        }
+        let uniq_tags = uniq(tags);
+        uniq_tags = ["All"].concat(uniq_tags.sort());
+        let buttons = uniq_tags.map((tag) => { return { name: tag, value: tag }; });
 
         // get github action variables
         // https://docs.github.com/ja/actions/learn-github-actions/environment-variables
@@ -97,7 +103,7 @@ class Gallery extends React.Component {
         } else {
             this.setState({
                 visible_images: this.state.images.filter(
-                    (image) => image.category === cat)
+                    (image) => image.tags.includes(cat))
             })
         }
         console.debug(this.state.visible_images);
@@ -107,9 +113,21 @@ class Gallery extends React.Component {
         axios.get("./image_list.json").then((response) => {
             const images = response.data.images;
             console.debug(`#images: ${images.length}`);
-            const categories = ["All"].concat(images.map((image) => image.category));
-            const uniq_categories = uniq(categories);
-            const buttons = uniq_categories.map((cat) => { return { name: cat, value: cat }; });
+
+            let tags = []
+            for (const key in images) {
+                if (Object.hasOwnProperty.call(images, key)) {
+                    const image = images[key];
+                    tags = tags.concat(image.tags);
+                }
+            }
+
+            console.debug(`#tags: ${tags.length}`)
+            console.debug(`tags: ${tags}`)
+            let uniq_tags = uniq(tags);
+            uniq_tags = ["All"].concat(uniq_tags.sort());
+            console.debug(`uniq_tags: ${uniq_tags}`)
+            let buttons = uniq_tags.map((tag) => { return { name: tag, value: tag }; });
             buttons.map((btn) => console.debug(btn));
             // console.debug(`buttons: ${buttons.map((btn)=>console.debug(btn))}`);
             this.setState({
@@ -126,7 +144,7 @@ class Gallery extends React.Component {
         const visible_images = this.state.visible_images.slice();
         const cards = visible_images.map((image, index) =>
             <Col key={index}>
-                <MyCard width={width} title={image.name} src={image.src} category={image.category} key={index} />
+                <MyCard width={width} title={image.name} src={image.src} tags={image.tags} key={index} />
             </Col>
         );
 
