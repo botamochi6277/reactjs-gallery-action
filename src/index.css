@@ -44,6 +44,13 @@ ul {
 .badge {
   margin-right: 10px;
 }
+.my-radio-btn-group {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+.my-radio-btn {
+  margin-right: 10px;
+}
 
 svg {
   font-family: 'Futura', sans-serif;

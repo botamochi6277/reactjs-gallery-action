@@ -174,7 +174,8 @@ class Gallery extends React.Component {
                 name="radio"
                 value={radio.value}
                 checked={this.state.category === radio.value}
-                onChange={(e) => this.filterImages(e.currentTarget.value)}>
+                onChange={(e) => this.filterImages(e.currentTarget.value)}
+                className='my-radio-btn'>
                 {radio.name}
             </ToggleButton>
 
@@ -186,9 +187,9 @@ class Gallery extends React.Component {
                 <Container className="gallery">
                     <MyNavbar brand={this.state.brand} author={this.state.actor} server={this.state.server} repo={this.state.repo} />
                     <div className="image card">
-                        <ButtonGroup className="mb-2">
+                        <div className="my-radio-btn-group">
                             {radio_buttons}
-                        </ButtonGroup>
+                        </div>
                         <Row xs={1} md={3} className="g-4">
                             {cards}
                         </Row>
