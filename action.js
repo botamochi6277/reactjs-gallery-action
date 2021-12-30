@@ -112,6 +112,14 @@ if (process.env.GITHUB_REPOSITORY) {
         fse.removeSync('/code/build/imgs/Example');
         console.log('remove /code/build/imgs/Example');
     }
+
+    // create page info file
+    s = JSON.stringify({
+        "actor": process.env.GITHUB_ACTOR,
+        "server": process.env.GITHUB_SERVER_URL,
+        "repo": process.env.GITHUB_REPOSITORY
+    });
+    fs.writeFileSync("/code/public/page_info.json", s);
 }
 
 // run in github workspace
