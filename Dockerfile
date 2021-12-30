@@ -3,5 +3,5 @@ WORKDIR /code
 COPY . /code
 RUN npm install &&\
     npm cache clean --force
-RUN npm run build
+RUN REACT_APP_GITHUB_ACTOR=$GITHUB_ACTOR REACT_APP_GITHUB_SERVER_URL=$GITHUB_SERVER_URL REACT_APP_GITHUB_REPOSITORY=$GITHUB_REPOSITORY npm run build
 ENTRYPOINT [ "node","/code/action.js"]
