@@ -5,6 +5,7 @@ import axios from "axios";
 import './index.css';
 import { Card, Row, Col, Badge, ToggleButton, ButtonGroup, Container, Nav, Navbar } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { FaReact, FaGithub, FaGithubAlt } from 'react-icons/fa';
 
 function uniq(array) {
     const unique_array = [];
@@ -34,12 +35,12 @@ function MyNavbar(props) {
     return (
         <Navbar bg="light" expand="lg">
             <Container>
-                <Navbar.Brand href="#">{props.brand}</Navbar.Brand>
+                <Navbar.Brand><FaReact className='react-icons' />{props.brand}</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
+                <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="me-auto">
-                        <Nav.Link href={`${props.server}/${props.author}`} target="blank_">{props.author}</Nav.Link>
-                        <Nav.Link href={`${props.server}/${props.repo}`} target="blank_">Code</Nav.Link>
+                        <Nav.Link href={`${props.server}/${props.author}`} target="blank_"><FaGithubAlt className='react-icons' /> {props.author}</Nav.Link>
+                        <Nav.Link href={`${props.server}/${props.repo}`} target="blank_"><FaGithub className='react-icons' />  Code</Nav.Link>
                     </Nav>
                 </Navbar.Collapse>
             </Container>
