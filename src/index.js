@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Helmet } from 'react-helmet';
 import axios from "axios";
 import './index.css';
 import { Card, Row, Col, Badge, ToggleButton, ButtonGroup, Container, Nav, Navbar } from 'react-bootstrap';
@@ -45,6 +46,17 @@ function MyNavbar(props) {
         </Navbar>
     )
 }
+
+const MyHelmet = (props) => {
+    return (
+        <Helmet>
+            <meta charSet="utf-8" />
+            <title>
+                {props.title}
+            </title>
+        </Helmet>
+    );
+};
 
 class Gallery extends React.Component {
     constructor(props) {
@@ -168,17 +180,20 @@ class Gallery extends React.Component {
         );
 
         return (
-            <Container className="gallery">
-                <MyNavbar brand={this.state.brand} author={this.state.actor} server={this.state.server} repo={this.state.repo} />
-                <div className="game-info">
-                    <ButtonGroup className="mb-2">
-                        {radio_buttons}
-                    </ButtonGroup>
-                    <Row xs={1} md={3} className="g-4">
-                        {cards}
-                    </Row>
-                </div>
-            </Container>
+            <div className="app">
+                <MyHelmet title={this.state.brand} />
+                <Container className="gallery">
+                    <MyNavbar brand={this.state.brand} author={this.state.actor} server={this.state.server} repo={this.state.repo} />
+                    <div className="game-info">
+                        <ButtonGroup className="mb-2">
+                            {radio_buttons}
+                        </ButtonGroup>
+                        <Row xs={1} md={3} className="g-4">
+                            {cards}
+                        </Row>
+                    </div>
+                </Container>
+            </div>
         );
     }
 }

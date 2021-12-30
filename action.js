@@ -119,7 +119,7 @@ if (process.env.GITHUB_REPOSITORY) {
         "server": process.env.GITHUB_SERVER_URL,
         "repo": process.env.GITHUB_REPOSITORY
     });
-    fs.writeFileSync("/code/public/page_info.json", s);
+    fs.writeFileSync("/code/build/page_info.json", s);
 }
 
 // run in github workspace
