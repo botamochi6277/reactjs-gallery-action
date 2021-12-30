@@ -28,13 +28,6 @@ function MyCard(props) {
     )
 }
 
-function MyButton(props) {
-    return (
-        <Button className="mybutton" onClick={props.onClick}>
-            {props.value}
-        </Button>
-    )
-}
 
 function MyNavbar(props) {
     return (
