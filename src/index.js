@@ -33,12 +33,12 @@ function MyNavbar(props) {
     return (
         <Navbar bg="light" expand="lg">
             <Container>
-                <Navbar.Brand href="#home">{props.brand}</Navbar.Brand>
+                <Navbar.Brand href="#">{props.brand}</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
                     <Nav className="me-auto">
-                        <Nav.Link href="#home">{props.author}</Nav.Link>
-                        <Nav.Link href="#link">Code</Nav.Link>
+                        <Nav.Link href={`${props.server}/${props.author}`} target="blank_">{props.author}</Nav.Link>
+                        <Nav.Link href={`${props.server}/${props.repo}`} target="blank_">Code</Nav.Link>
                     </Nav>
                 </Navbar.Collapse>
             </Container>
@@ -148,8 +148,7 @@ class Gallery extends React.Component {
 
         return (
             <Container className="gallery">
-                <MyNavbar brand={this.state.brand} author={this.state.actor} />
-                <h2>{this.state.title}</h2>
+                <MyNavbar brand={this.state.brand} author={this.state.actor} server={this.state.server} repo={this.state.repo} />
                 <div className="game-info">
                     <ButtonGroup className="mb-2">
                         {radio_buttons}
@@ -169,7 +168,7 @@ class Gallery extends React.Component {
 // ========================================
 
 ReactDOM.render(
-    <Gallery title="My Gallery" />,
+    <Gallery />,
     document.getElementById('root')
 );
 
