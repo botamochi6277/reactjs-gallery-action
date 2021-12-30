@@ -66,12 +66,27 @@ class Gallery extends React.Component {
         uniq_categories = ["All"].concat(uniq_categories.sort());
         let buttons = uniq_categories.map((cat) => { return { name: cat, value: cat }; });
 
+        // get github action variables
+        // https://docs.github.com/ja/actions/learn-github-actions/environment-variables
+        // react.js need REACT_APP prefix for environment variable names
+        const actor = process.env.REACT_APP_GITHUB_ACTOR; // e.g. octocat
+        const server = process.env.REACT_APP_GITHUB_SERVER_URL; // e.g. https://github.com
+        const repo = process.env.REACT_APP_GITHUB_REPOSITORY; // e.g. octocat/Hello-World
+        const brand = repo.split("/")[1];
+        console.debug(`actor: ${actor}`)
+        console.debug(`server: ${server}`)
+        console.debug(`repo: ${repo}`)
+
         this.state = {
             title: props.title,
             width: "",
             images: images,
             visible_images: images.slice(),
             buttons: buttons,
+            actor: actor,
+            server: server,
+            repo: repo,
+            brand: brand,
             category: "All"
         }
     }
@@ -92,18 +107,18 @@ class Gallery extends React.Component {
                     (image) => image.category === cat)
             })
         }
-        console.log(this.state.visible_images);
+        console.debug(this.state.visible_images);
     }
 
     componentDidMount() {
         axios.get("./image_list.json").then((response) => {
             const images = response.data.images;
-            console.log(`#images: ${images.length}`);
+            console.debug(`#images: ${images.length}`);
             const categories = ["All"].concat(images.map((image) => image.category));
             const uniq_categories = uniq(categories);
             const buttons = uniq_categories.map((cat) => { return { name: cat, value: cat }; });
-            buttons.map((btn) => console.log(btn));
-            // console.log(`buttons: ${buttons.map((btn)=>console.log(btn))}`);
+            buttons.map((btn) => console.debug(btn));
+            // console.debug(`buttons: ${buttons.map((btn)=>console.debug(btn))}`);
             this.setState({
                 images: images,
                 visible_images: images.slice(),
@@ -140,7 +155,7 @@ class Gallery extends React.Component {
 
         return (
             <Container className="gallery">
-                <MyNavbar brand="awesome" author="super_user" />
+                <MyNavbar brand={this.state.brand} author={this.state.actor} />
                 <h2>{this.state.title}</h2>
                 <div className="game-info">
                     <ButtonGroup className="mb-2">
