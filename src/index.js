@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import axios from "axios";
 import './index.css';
 // import Button from 'react-bootstrap/Button';
-import { Button, Card, Row, Col, Badge, ToggleButton, ButtonGroup, Container } from 'react-bootstrap';
+import { Button, Card, Row, Col, Badge, ToggleButton, ButtonGroup, Container, Nav, Navbar } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function uniq(array) {
@@ -33,6 +33,23 @@ function MyButton(props) {
         <Button className="mybutton" onClick={props.onClick}>
             {props.value}
         </Button>
+    )
+}
+
+function MyNavbar(props) {
+    return (
+        <Navbar bg="light" expand="lg">
+            <Container>
+                <Navbar.Brand href="#home">{props.brand}</Navbar.Brand>
+                <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
+                    <Nav className="me-auto">
+                        <Nav.Link href="#home">{props.author}</Nav.Link>
+                        <Nav.Link href="#link">Code</Nav.Link>
+                    </Nav>
+                </Navbar.Collapse>
+            </Container>
+        </Navbar>
     )
 }
 
@@ -123,6 +140,7 @@ class Gallery extends React.Component {
 
         return (
             <Container className="gallery">
+                <MyNavbar brand="awesome" author="super_user" />
                 <h2>{this.state.title}</h2>
                 <div className="game-info">
                     <ButtonGroup className="mb-2">
@@ -136,6 +154,9 @@ class Gallery extends React.Component {
         );
     }
 }
+
+
+
 
 // ========================================
 
