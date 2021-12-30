@@ -65,27 +65,16 @@ class Gallery extends React.Component {
         uniq_tags = ["All"].concat(uniq_tags.sort());
         let buttons = uniq_tags.map((tag) => { return { name: tag, value: tag }; });
 
-        // get github action variables
-        // https://docs.github.com/ja/actions/learn-github-actions/environment-variables
-        // react.js need REACT_APP prefix for environment variable names
-        const actor = process.env.REACT_APP_GITHUB_ACTOR; // e.g. octocat
-        const server = process.env.REACT_APP_GITHUB_SERVER_URL; // e.g. https://github.com
-        const repo = process.env.REACT_APP_GITHUB_REPOSITORY; // e.g. octocat/Hello-World
-        const brand = repo.split("/")[1];
-        console.debug(`actor: ${actor}`)
-        console.debug(`server: ${server}`)
-        console.debug(`repo: ${repo}`)
-
         this.state = {
             title: props.title,
             width: "",
             images: images,
             visible_images: images.slice(),
             buttons: buttons,
-            actor: actor,
-            server: server,
-            repo: repo,
-            brand: brand,
+            actor: "octcat",
+            server: "https://github.com",
+            repo: "octocat/Hello-World",
+            brand: "Hello-World",
             category: "All"
         }
     }
@@ -110,6 +99,20 @@ class Gallery extends React.Component {
     }
 
     componentDidMount() {
+        // load page info
+        axios.get("./page_info.json").then((response) => {
+            const info = response.data;
+            this.setState(
+                {
+                    actor: info.actor,
+                    server: info.server,
+                    repo: info.repo,
+                    brand: info.repo.split("/").slice(-1)
+                }
+            );
+        });
+
+        // load image list
         axios.get("./image_list.json").then((response) => {
             const images = response.data.images;
             console.debug(`#images: ${images.length}`);
