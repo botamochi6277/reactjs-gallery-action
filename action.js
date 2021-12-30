@@ -106,8 +106,8 @@ if (process.env.GITHUB_REPOSITORY) {
     console.log(`current repository: ${process.env.GITHUB_REPOSITORY}`)
     if (process.env.GITHUB_REPOSITORY !== "botamochi6277/reactjs-gallery-action") {
         // remove sample images
-        fse.removeSync('/code/imgs/Example');
-        console.log('remove /code/imgs/Example');
+        fse.removeSync('/code/build/imgs/Example');
+        console.log('remove /code/build/imgs/Example');
     }
 }
 
